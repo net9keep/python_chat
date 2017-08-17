@@ -1,28 +1,3 @@
-# import socketserver
-#
-# SERVER_IP = "127.0.0.1"
-# SERVER_PORT = 10000
-#
-#
-# class MyTCPHandler(socketserver.BaseRequestHandler):
-#     def handler(self):
-#         print("hello")
-#         print(self.client_address[0])
-#         sock = self.request
-#
-#         recv_buffer = sock.recv(1024)
-#         receive = str(recv_buffer, encoding="utf-8")
-#         print("receive : {0}".format(receive))
-#
-#         sock.send(receive)
-#         sock.close()
-#
-#
-# server = socketserver.TCPServer(('127.0.0.1', 20000), MyTCPHandler)
-# print("Server Start")
-# server.serve_forever()
-
-
 import socket
 import select
 
@@ -68,7 +43,7 @@ while input_list:
                 else:
                     cl.close()
                     input_list.remove(cl)
-    except KeyboardInterrupt
+    except KeyboardInterrupt:
         s.close()
 
 s.close()
