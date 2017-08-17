@@ -1,8 +1,8 @@
 import socket
 import select
-
-SERVER_IP = "127.0.0.1"
-SERVER_PORT = 30001
+import  Server_Info
+SERVER_IP = Server_Info.SERVER_IP
+SERVER_PORT = Server_Info.SERVER_PORT
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((SERVER_IP,SERVER_PORT))
@@ -22,7 +22,7 @@ while input_list:
                 for socket_in_list in input_list:
                     if socket_in_list != s and socket_in_list != cl:
                         try:
-                            socket_in_list.send("new user join!")
+                            socket_in_list.send("new user join!".encode())
                         except Exception as e:
                             socket_in_list.close()
                             input_list.remove(socket_in_list)
@@ -33,6 +33,7 @@ while input_list:
                     for socket_in_list in input_list:
                         if socket_in_list != s and socket_in_list != cl:
                             try:
+                                print("send data", data)
                                 socket_in_list.send(data)
                             except Exception as e:
                                 print(e)
