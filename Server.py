@@ -1,5 +1,6 @@
 import socket
 import select
+import DataBase
 import  Server_Info
 SERVER_IP = Server_Info.SERVER_IP
 SERVER_PORT = Server_Info.SERVER_PORT
@@ -26,6 +27,14 @@ class Server:
             id = data_split[1].replace("ID:","")
             pw = data_split[2].replace("PW:","")
             print("id:{0} pw:{1}".format(id,pw))
+            chat_db = DataBase()
+            if login_type['Login'] == 0:
+                # TODO write Database function call of login
+                return 0
+            elif login_type['SignUp'] == 0:
+                # TODO write Database function call of SignUp
+                return 0
+
             return data
         else:
             return data
