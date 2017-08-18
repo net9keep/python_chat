@@ -2,6 +2,7 @@
 
 import sqlite3
 
+
 class DataBase:
 
     def __init__(self):
@@ -48,5 +49,3 @@ class DataBase:
                 return True
             else:
                 return False
-test = DataBase()
-test.connect_db()

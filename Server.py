@@ -1,7 +1,7 @@
 import socket
 import select
 import DataBase
-import  Server_Info
+import Server_Info
 SERVER_IP = Server_Info.SERVER_IP
 SERVER_PORT = Server_Info.SERVER_PORT
 class Server:
@@ -14,7 +14,7 @@ class Server:
 
     def check_data(self, data):
         #데이터 체크
-        login_type = {"Login":"","SignUp":""}
+        login_type = {"Login": "","SignUp": ""}
         data = data.decode()
         data_split = data.split()
         print(data_split)
@@ -27,15 +27,23 @@ class Server:
             id = data_split[1].replace("ID:","")
             pw = data_split[2].replace("PW:","")
             print("id:{0} pw:{1}".format(id,pw))
-            chat_db = DataBase()
+            chat_db = DataBase.DataBase()
             if login_type['Login'] == 0:
-                # TODO write Database function call of login
-                return 0
+                chat_db.connect_db()
+                result = chat_db.login(id, pw)
+                if result:
+                    return "login Success. welcome '" + id + "'!"
+                else:
+                    return "login False"
             elif login_type['SignUp'] == 0:
                 # TODO write Database function call of SignUp
-                return 0
+                chat_db.connect_db()
+                result = chat_db.sign_up(id, pw)
+                if result:
+                    return "SignUp Success"
+                else:
+                    return "SignUp False"
 
-            return data
         else:
             return data
 
