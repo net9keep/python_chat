@@ -4,6 +4,8 @@ import DataBase
 import Server_Info
 SERVER_IP = Server_Info.SERVER_IP
 SERVER_PORT = Server_Info.SERVER_PORT
+#ver 1
+
 class Server:
     def __init__(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

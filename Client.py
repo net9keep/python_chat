@@ -6,6 +6,7 @@ import sys
 
 SERVER_IP = Server_Info.SERVER_IP
 SERVER_PORT = Server_Info.SERVER_PORT
+# ver1
 
 
 class Client:
