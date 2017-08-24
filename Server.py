@@ -23,7 +23,10 @@ class Server:
         try:
             login_type['Login'] = data_split.index('Login')
         except ValueError:
-            login_type['SignUp'] = 0
+            try:
+                login_type['SignUp'] = data_split.index('SignUp')
+            except ValueError:
+                return data
 
         if login_type['Login'] == 0 or login_type['SignUp'] == 0:
             id = data_split[1].replace("ID:","")
@@ -36,7 +39,8 @@ class Server:
                 if result:
                     return "login Success. welcome '" + id + "'!"
                 else:
-                    return "login False"
+                    print('[error] login false')
+                    return False
             elif login_type['SignUp'] == 0:
                 # TODO write Database function call of SignUp
                 chat_db.connect_db()
@@ -44,10 +48,8 @@ class Server:
                 if result:
                     return "SignUp Success"
                 else:
-                    return "SignUp False"
-
-        else:
-            return data
+                    print('[error] SignUp false')
+                    return False
 
 
     def listen(self):
@@ -58,8 +60,7 @@ class Server:
                 for cl in input_ready:
                     if cl == self.s:
                         client, address = self.s.accept()
-                        #접속을 허가 했을때 표시할 내용
-                        print("new user join")
+                        print("new client connect")
                         self.input_list.append(client)
                         for socket_in_list in self.input_list:
                             if socket_in_list != self.s and socket_in_list != cl:

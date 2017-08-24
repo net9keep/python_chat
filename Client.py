@@ -46,6 +46,11 @@ class Client:
             self.login()
         self.data = {"id": self.id, "pw": self.pw}
         self.send_data()
+    def chk_data(self, data):
+        data = data.decode()
+        data_split = data.split()
+        if str("<"+self.data["id"]+">") not in data_split:
+            print(data)
 
     def send_data(self):
         while True:
@@ -62,7 +67,7 @@ class Client:
                             print(data)
                             self.prompt()
                         else:
-                            print(data)
+                            self.chk_data(data)
                             self.prompt()
                             if self.data and self.choice == '1':
                                 message = "Login ID:{0} PW:{1}".format(self.data["id"], self.data["pw"]).encode()
@@ -74,8 +79,8 @@ class Client:
                                 self.choice = 0
                     else:
                         message = sys.stdin.readline()
+                        message = "<" + self.data["id"] + "> " + message
                         self.client_socket.send(message.encode())
-                        self.prompt()
             except KeyboardInterrupt:
                 self.client_socket.close()
 
